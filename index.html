@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PurrTok — твой пушистый помощник</title>
+
+  <!-- Подключение Telegram Mini Apps -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 30px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: var(--tg-theme-text-color, #332b35);
+      background: var(--tg-theme-bg-color, #fff1f5);
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      padding: 30px 22px;
+      border-radius: 24px;
+      background: var(--tg-theme-secondary-bg-color, #ffffff);
+    }
+
+    .cat {
+      font-size: 76px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+    }
+
+    p {
+      line-height: 1.6;
+      opacity: 0.8;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 15px 25px;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      color: white;
+      background: #d77ca8;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="card">
+    <div class="cat">🐱</div>
+
+    <h1>Привет! Я PurrTok</h1>
+
+    <p>
+      Твой пушистый помощник для отдыха,
+      хорошего настроения и борьбы со стрессом.
+    </p>
+
+    <p id="status">Я уже готов помочь тебе мурлыкать!</p>
+
+    <button onclick="sayHello()">
+      Погладить котика 🐾
+    </button>
+  </main>
+
+  <script>
+    // Проверяем, открыто ли приложение внутри Telegram
+    const tg = window.Telegram?.WebApp;
+
+    if (tg) {
+      tg.ready();
+      tg.expand();
+
+      document.getElementById("status").textContent =
+        "Ты открыл PurrTok внутри Telegram! 🐾";
+    }
+
+    function sayHello() {
+      document.getElementById("status").textContent =
+        "Мур-р-р! Ты отлично справляешься ❤️";
+
+      if (tg) {
+        tg.HapticFeedback?.impactOccurred("light");
+      }
+    }
+  </script>
+</body>
+</html>
